@@ -1,29 +1,9 @@
-/**
- * Handles the circle class.
- * @public
- */
-class Circle {
-  /**
-   * The radius of the circle.
-   * @private
-   */
-  #radius = 0;
+// code for npm package here
+import Circle from './shape/circle';
 
-  /**
-   * @description Sets the value for class parameter radius.
-   * @param {number} value
-   */
-  set radius(value) {
-    this.#radius = value;
-  }
-
-  /**
-   * @description Returns the value of radius.
-   * @return {number} The value of radius.
-   */
-  get radius() {
-    return this.#radius;
-  }
-}
-
-export default Circle;
+const myCircle = new Circle();
+myCircle.radius = 10;
+console.log(myCircle.radius);
+myCircle.radius2 = 'ghj';
+console.log(myCircle.radius2);
+console.log(myCircle.radius);
