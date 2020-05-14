@@ -1,0 +1,10 @@
+.nyc_output/**
+coverage/**
+node_modules/**
+.vscode/**
+.src/**
+./test/**
+.babelrc
+.editorconfig
+.eslintrc
+./LICENSE

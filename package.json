@@ -1,0 +1,49 @@
+{
+  "name": "mensuration",
+  "version": "0.0.1",
+  "description": "",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "nyc mocha --require @babel/register",
+    "build": "npm run lint && babel ./src -d ./lib",
+    "lint": "eslint ./src",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhieshekumar/mensuration.git"
+  },
+  "keywords": [
+    "npm",
+    "node",
+    "mensuration",
+    "javascript"
+  ],
+  "author": "Abhishek Kumar",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-private-methods": "^7.8.3",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/register": "^7.9.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.0.0",
+    "eslint-config-google": "^0.14.0",
+    "http-server": "^0.12.3",
+    "mocha": "^7.1.2",
+    "nyc": "^15.0.1"
+  },
+  "bugs": {
+    "url": "https://github.com/abhieshekumar/mensuration/issues"
+  },
+  "homepage": "https://github.com/abhieshekumar/mensuration#readme",
+  "dependencies": {},
+  "nyc": {
+    "reporter": [
+      "lcov",
+      "text"
+    ]
+  }
+}

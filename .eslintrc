@@ -1,0 +1,10 @@
+{
+  "extends": "google",
+  "parser": "babel-eslint",
+  "rules": {
+    "strict": 0
+  },
+  "env": {
+    "mocha": true
+  }
+}
