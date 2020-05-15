@@ -23,6 +23,22 @@ class Square {
   }
 
   /**
+   * Defines the parameters for the square
+   * @param {number} side
+   */
+  define(side) {
+    this.side = side;
+  }
+
+  /**
+   * Returns an object representing the square.
+   * @return {Object} an object defining the parameters of square.
+   */
+  get() {
+    return {side: this.side};
+  }
+
+  /**
    * Returns the perimeter of square object
    * @return {number} the perimeter of square
    */
