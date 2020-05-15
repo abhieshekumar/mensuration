@@ -24,6 +24,22 @@ class Circle {
   }
 
   /**
+   * Defines the parameters for the circle
+   * @param {number} radius
+   */
+  define(radius) {
+    this.radius = radius;
+  }
+
+  /**
+   * Returns an object representing the circle.
+   * @return {Object} an object defining the parameters of circle.
+   */
+  get() {
+    return {radius: this.radius};
+  }
+
+  /**
    * Return the area of the circle object
    * @return {number} the area of radius
    */
