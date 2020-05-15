@@ -24,14 +24,6 @@ class Circle {
   }
 
   /**
-   * Return the perimeter of circle object
-   * @return {number} the perimeter of radius
-   */
-  perimeter() {
-    return Constants.TWO_PI * this.radius;
-  }
-
-  /**
    * Return the area of the circle object
    * @return {number} the area of radius
    */
@@ -40,11 +32,37 @@ class Circle {
   }
 
   /**
+   * Calculates the area of a sector, given angle in radians
+   * @param {number} angle
+   * @return {number} area of sector
+   */
+  areaOfSector(angle) {
+    return (1/2) * this.radius * this.radius * angle;
+  }
+
+  /**
+   * Calculates the arc length, given the angle in radians
+   * @param {number} angle
+   * @return {number} arc length
+   */
+  arcLength(angle) {
+    return this.radius * angle;
+  }
+
+  /**
    * Return the diameter of the circle object
    * @return {number} the diameter of radius
    */
   diameter() {
     return 2 * this.radius;
+  }
+
+  /**
+   * Return the perimeter of circle object
+   * @return {number} the perimeter of radius
+   */
+  perimeter() {
+    return Constants.TWO_PI * this.radius;
   }
 }
 
