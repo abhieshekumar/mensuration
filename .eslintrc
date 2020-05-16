@@ -2,7 +2,14 @@
   "extends": "google",
   "parser": "babel-eslint",
   "rules": {
-    "strict": 0
+    "strict": 0,
+    "require-jsdoc": [2, {
+      "require": {
+          "FunctionDeclaration": false,
+          "MethodDefinition": false,
+          "ClassDeclaration": false
+      }
+  }]
   },
   "env": {
     "mocha": true
