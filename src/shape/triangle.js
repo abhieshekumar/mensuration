@@ -70,8 +70,9 @@ class Triangle {
   }
 
   define(sideA=0, sideB=0, sideC=0, angleA=0, angleB=0, angleC=0) {
-    if (Validator.isTriangle(sideA, sideB, sideC,
-        angleA, angleB, angleC)) {
+    const valid = Validator.isTriangle(sideA, sideB, sideC,
+        angleA, angleB, angleC);
+    if (valid) {
       this.#sideA = sideA;
       this.#sideB = sideB;
       this.#sideC = sideC;
@@ -79,22 +80,6 @@ class Triangle {
       this.#angleB = angleB;
       this.#angleC = angleC;
     }
-  }
-
-  get() {
-    return {side: this.side};
-  }
-
-  perimeter() {
-    return 4 * this.side;
-  }
-
-  area() {
-    return this.side * this.side;
-  }
-
-  diagonal() {
-    return this.side * Math.sqrt(2);
   }
 }
 
