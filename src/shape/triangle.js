@@ -115,6 +115,28 @@ class Triangle {
         this.sideC = (Math.sin(this.angleC)*this.sideB)/(Math.sin(this.angleB));
       }
       // All the side lengths hav been computed
+    } else if (type == 'ASA') {
+      const angles = [this.angleA, this.angleB, this.angleC];
+
+      // Find the index of zero angle
+      const indexOfZeroAngle = angles.indexOf(0);
+      angles[indexOfZeroAngle] = Constants.PI - angles.reduce((a, b) => a+b, 0);
+      this.angleA = angles[0];
+      this.angleB = angles[1];
+      this.angleC = angles[2];
+      // All angles have been computed
+
+      if (this.sideA && this.angleB && this.angleC) {
+        this.sideB = (Math.sin(this.angleB)*this.sideA)/(Math.sin(this.angleA));
+        this.sideC = (Math.sin(this.angleC)*this.sideA)/(Math.sin(this.angleA));
+      } else if (this.sideB && this.angleA && this.angleC) {
+        this.sideA = (Math.sin(this.angleA)*this.sideB)/(Math.sin(this.angleB));
+        this.sideC = (Math.sin(this.angleC)*this.sideB)/(Math.sin(this.angleB));
+      } else if (this.sideC && this.angleA && this.angleB) {
+        this.sideA = (Math.sin(this.angleA)*this.sideC)/(Math.sin(this.angleC));
+        this.sideB = (Math.sin(this.angleB)*this.sideC)/(Math.sin(this.angleC));
+      }
+      // All sides computed
     }
   }
 
