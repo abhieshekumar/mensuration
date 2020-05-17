@@ -28,12 +28,6 @@ class Validator {
         // The triangle is valid based on sides only
         return 'SSS';
       }
-    } else if (angleA && angleB && angleC && (sideA || sideB || sideC)) {
-      // Based on AAA and at-least one side to fix the triangle
-      if (( angleA + angleB + angleC ) == 2 * Constants.PI) {
-        // The triangle is valid based on angles only
-        return 'AAA';
-      }
     } else if (((angleA && angleB) && (sideA || sideB)) ||
                ((angleB && angleC) && (sideB || sideC)) ||
                ((angleC && angleA) && (sideC || sideA))) {
@@ -41,6 +35,7 @@ class Validator {
       if ((angleA + angleB + angleC) < Constants.PI) {
         // The triangle is valid based on AAS
         return 'AAS';
+        // Also SAA
       }
     } else if (((angleA && angleB) && (sideC)) ||
                ((angleB && angleC) && (sideA)) ||
@@ -57,6 +52,7 @@ class Validator {
       if ((angleA + angleB + angleC) < Constants.PI) {
         // The triangle is valid based on SSA
         return 'SSA';
+        // Also ASS
       }
     } else if ((sideA && sideB ) && (angleC) ||
                (sideB && sideC ) && (angleA) ||
