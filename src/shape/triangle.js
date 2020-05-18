@@ -63,13 +63,13 @@ class Triangle {
   define(sideA=0, sideB=0, sideC=0, angleA=0, angleB=0, angleC=0) {
     const valid = Validator.isTriangle(sideA, sideB, sideC, angleA, angleB, angleC);
     if (valid) {
-      this.a = sideA;
-      this.b = sideB;
-      this.c = sideC;
-      this.A = angleA;
-      this.B = angleB;
-      this.C = angleC;
-      this.compute(valid);
+      this.sideA = sideA;
+      this.sideB = sideB;
+      this.sideC = sideC;
+      this.angleA = angleA;
+      this.angleB = angleB;
+      this.angleC = angleC;
+      this.sideCompute(valid);
     }
   }
 
@@ -94,77 +94,77 @@ class Triangle {
 
   compute(type) {
     if (type == 'SSS') {
-      if (this.a + this.b <= this.c || this.b + this.c <= this.a || this.c + this.a <= this.b) {
+      if (this.sideA + this.sideB <= this.sideC || this.sideB + this.sideC <= this.sideA || this.sideC + this.sideA <= this.sideB) {
         // Invalid
       } else {
-        this.A = this.getAngle(this.b, this.c, this.a);
-        this.B = this.getAngle(this.c, this.a, this.b);
-        this.C = this.getAngle(this.a, this.b, this.c);
+        this.angleA = this.getAngle(this.sideB, this.sideC, this.sideA);
+        this.angleB = this.getAngle(this.sideC, this.sideA, this.sideB);
+        this.angleC = this.getAngle(this.sideA, this.sideB, this.sideC);
       }
     } else if (type == 'AAS|ASA') {
-      if (!this.A) {
-        this.A = Constants.PI - this.B - this.C;
-      } if (!this.B) {
-        this.B = Constants.PI - this.A - this.C;
-      } if (!this.C) {
-        this.C = Constants.PI - this.A - this.B;
-      } if (this.A <= 0 || this.B <=0 || this.C <= 0) {
+      if (!this.angleA) {
+        this.angleA = Constants.PI - this.angleB - this.angleC;
+      } if (!this.angleB) {
+        this.angleB = Constants.PI - this.angleA - this.angleC;
+      } if (!this.angleC) {
+        this.angleC = Constants.PI - this.angleA - this.angleB;
+      } if (this.angleA <= 0 || this.angleB <=0 || this.angleC <= 0) {
         // Invalid. Do not execute further.
       }
-      const sinA = Math.sin(this.A);
-      const sinB = Math.sin(this.B);
-      const sinC = Math.sin(this.C);
+      const sinA = Math.sin(this.angleA);
+      const sinB = Math.sin(this.angleB);
+      const sinC = Math.sin(this.angleC);
       let ratio = 0;
       if (!!a) {
-        ratio = this.a/sinA;
+        ratio = this.sideA/sinA;
       } else if (!!b) {
-        ratio = this.b/sinB;
+        ratio = this.sideB/sinB;
       } else if (!!c) {
-        ratio = this.c/sinC;
+        ratio = this.sideC/sinC;
       }
-      if (!this.a) {
-        this.a = ratio * sinA;
-      } else if (!this.b) {
-        this.b = ratio * sinB;
-      } else if (!this.c) {
-        this.c = ratio * sinC;
+      if (!this.sideA) {
+        this.sideA = ratio * sinA;
+      } else if (!this.sideB) {
+        this.sideB = ratio * sinB;
+      } else if (!this.sideC) {
+        this.sideC = ratio * sinC;
       }
     } else if (type == 'SAS') {
-      if (!!this.A && this.A >= Constants.PI || !!this.B && this.B >= Constants.PI || !!this.C && this.C >= Constants.PI) {
+      if (!!this.angleA && this.angleA >= Constants.PI || !!this.angleB && this.angleB >= Constants.PI || !!this.angleC && this.angleC >= Constants.PI) {
         // Invalid. Do not proceed
       }
-      if (!this.a) {
-        this.a = this.getSide(this.b, this.c, this.A);
-      } if (!this.b) {
-        this.b = this.getSide(this.c, this.a, this.B);
-      } if (!this.c) {
-        this.c = this.getSide(this.a, this.b, this.C);
-      } if (!this.A) {
-        this.A = this.getAngle(this.b, this.c, this.a);
-      } if (!this.B) {
-        this.B = this.getAngle(this.c, this.a, this.b);
-      } if (!this.C) {
-        this.C = this.getAngle(this.a, this.b, this.c);
+      if (!this.sideA) {
+        this.sideA = this.getSide(this.sideB, this.sideC, this.angleA);
+      } if (!this.sideB) {
+        this.sideB = this.getSide(this.sideC, this.sideA, this.angleB);
+      } if (!this.sideC) {
+        this.sideC = this.getSide(this.sideA, this.sideB, this.angleC);
+      } if (!this.angleA) {
+        this.angleA = this.getAngle(this.sideB, this.sideC, this.sideA);
+      } if (!this.angleB) {
+        this.angleB = this.getAngle(this.sideC, this.sideA, this.sideB);
+      } if (!this.angleC) {
+        this.angleC = this.getAngle(this.sideA, this.sideB, this.sideC);
       }
     } else if (type == 'SSA') {
       let knownSide;
       let knownAngle;
       let partialSide;
-      if (!!this.a && !!this.A) {
+      if (!!this.sideA && !!this.angleA) {
         knownSide = a;
         knownAngle = A;
-      } if (!!this.b && !!this.B) {
+      } if (!!this.sideB && !!this.angleB) {
         knownSide = b;
         knownAngle = B;
-      } if (!!this.c && !!this.C) {
+      } if (!!this.sideC && !!this.angleC) {
         knownSide = c;
         knownAngle = C;
-      } if (!!this.a && !this.A) {
-        partialSide = this.a;
-      } if (!!this.b && !this.B) {
-        partialSide = this.b;
-      } if (!!this.c && !this.C) {
-        partialSide = this.c;
+      } if (!!this.sideA && !this.angleA) {
+        partialSide = this.sideA;
+      } if (!!this.sideB && !this.angleB) {
+        partialSide = this.sideB;
+      } if (!!this.sideC && !this.angleC) {
+        partialSide = this.sideC;
       }
 
       if (knownAngle >= Constants.PI) {
@@ -195,39 +195,36 @@ class Triangle {
         unknownAngle = [unknownAngle0, unknownAngle1];
         unknownSide = [unknownSide0, unknownSide1];
       }
-      if (!!this.a && !this.A) {
-        this.A = partialAngle;
-      } if (!!this.b && !this.B) {
-        this.B = partialAngle;
-      } if (!!this.c && !this.C) {
-        this.C = partialAngle;
-      } if (!!this.a && !this.A) {
-        this.a = unknownSide;
-        this.A = unknownAngle;
-      } if (!!this.b && !this.B) {
-        this.b = unknownSide;
-        this.B = unknownAngle;
-      } if (!!this.c && !this.C) {
-        this.c = unknownSide;
-        this.C = unknownAngle;
+      if (!!this.sideA && !this.angleA) {
+        this.angleA = partialAngle[0];
+      } if (!!this.sideB && !this.angleB) {
+        this.angleB = partialAngle[0];
+      } if (!!this.sideC && !this.angleC) {
+        this.angleC = partialAngle[0];
+      } if (!!this.sideA && !this.angleA) {
+        this.sideA = unknownSide[0];
+        this.angleA = unknownAngle[0];
+      } if (!!this.sideB && !this.angleB) {
+        this.sideB = unknownSide[0];
+        this.angleB = unknownAngle[0];
+      } if (!!this.sideC && !this.angleC) {
+        this.sideC = unknownSide[0];
+        this.angleC = unknownAngle[0];
       }
     }
   }
 
   get() {
-    return {sideA: this.a,
-      sideB: this.b,
-      sideC: this.c,
-      angleA: this.A,
-      angleB: this.B,
-      angleC: this.C};
+    return {sideA: this.sideA,
+      sideB: this.sideB,
+      sideC: this.sideC,
+      angleA: this.angleA,
+      angleB: this.angleB,
+      angleC: this.angleC};
   }
 
   perimeter() {
-    if (Arrays.isArray(this.a) || Arrays.isArray(this.b) || Arrays.isArray(this.c)) {
-      const result = [0, 0];
-      
-    }
+    return this.sideA + this.sideB + this.sideC;
   }
 
   semiPerimeter() {
@@ -235,8 +232,26 @@ class Triangle {
   }
 
   area() {
-    const semiPerimeter = this.semiPerimeter();
-    return Math.sqrt(semiPerimeter*(semiPerimeter-this.a));
+    return Math.sqrt(semiPerimeter*(semiPerimeter-this.sideA)*(semiPerimeter-this.sideB)*(semiPerimeter-this.sideC));
+  }
+
+  isRightAngled() {
+    let sides = [this.sideA, this.sideB, this.sideC];
+    sides.sort();
+    sides = sides.map((x) => x**2);
+    return sides[2]**2 == (sides[0]**2 + sides[1]**2);
+  }
+
+  isEquilateral() {
+    return this.sideA === this.sideB && this.sideB === this.sideC;
+  }
+
+  isIsosceles() {
+    return this.sideA === this.sideB || this.sideA === this.sideC || this.sideB === this.sideC;
+  }
+
+  isScalene() {
+    return this.isEquilateral() && this.isScalene();
   }
 }
 
