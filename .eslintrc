@@ -9,7 +9,8 @@
           "MethodDefinition": false,
           "ClassDeclaration": false
       }
-  }]
+    }],
+    "max-len": 0
   },
   "env": {
     "mocha": true

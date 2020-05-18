@@ -1,6 +1,5 @@
 // creating a validator class
 import Validate from './validate';
-import * as Constants from '../constants';
 
 /** Used for performing validation of physical quatities. */
 class Validator {
@@ -19,55 +18,21 @@ class Validator {
     return rules.every((rule) => Validate[rule](param));
   }
 
-  static isTriangle(sideA, sideB, sideC, angleA, angleB, angleC) {
-    if (sideA && sideB && sideC) {
-      // Based on SSS
-      if ( (sideA + sideB) > sideC &&
-           (sideB + sideC) > sideA &&
-           (sideC + sideA) > sideB) {
-        // The triangle is valid based on sides only
-        return 'SSS';
-      }
-    } else if (angleA && angleB && angleC && (sideA || sideB || sideC)) {
-      // Based on AAA and at-least one side to fix the triangle
-      if (( angleA + angleB + angleC ) == 2 * Constants.PI) {
-        // The triangle is valid based on angles only
-        return 'AAA';
-      }
-    } else if (((angleA && angleB) && (sideA || sideB)) ||
-               ((angleB && angleC) && (sideB || sideC)) ||
-               ((angleC && angleA) && (sideC || sideA))) {
-      // Based on AAS
-      if ((angleA + angleB + angleC) < Constants.PI) {
-        // The triangle is valid based on AAS
-        return 'AAS';
-      }
-    } else if (((angleA && angleB) && (sideC)) ||
-               ((angleB && angleC) && (sideA)) ||
-               ((angleC && angleA) && (sideB))) {
-      // Based on ASA
-      if ((angleA + angleB + angleC) < Constants.PI) {
-        // The triangle is valid based on ASA
-        return 'ASA';
-      }
-    } else if ((sideA && sideB ) && (angleA || angleB) ||
-               (sideB && sideC ) && (angleB || angleC) ||
-               (sideC && sideA ) && (angleC || angleA)) {
-      // Based on SSA
-      if ((angleA + angleB + angleC) < Constants.PI) {
-        // The triangle is valid based on SSA
-        return 'SSA';
-      }
-    } else if ((sideA && sideB ) && (angleC) ||
-               (sideB && sideC ) && (angleA) ||
-               (sideC && sideA ) && (angleB)) {
-      // Based on SAS
-      if ((angleA + angleB + angleC) < Constants.PI) {
-        // The triangle is valid based on SAS
-        return 'SAS';
-      }
-    } else {
+  static isTriangle(a, b, c, A, B, C) {
+    const sides = !!a + !!b + !!c;
+    const angles = !!A + !!B + !!C;
+    if (sides + angles != 3) {
       return false;
+    } else if (sides == 0) {
+      return false;
+    } else if (sides == 3) {
+      return 'SSS';
+    } else if (angles == 2) {
+      return 'AAS|ASA';
+    } else if (!!A && !!a || !!B && !!b || !!C && !!c) {
+      return 'SAS';
+    } else {
+      return 'SSA';
     }
   }
 }
