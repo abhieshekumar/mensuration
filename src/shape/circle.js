@@ -19,7 +19,7 @@ class Circle {
    */
   define(radius) {
     if (Validator.isLength(radius)) {
-      this.#radius = value;
+      this.#radius = radius;
     }
   }
 

@@ -38,13 +38,14 @@ class Rhombus {
   }
 
   define(side=0, angleA=0, angleB=0, dA=0, dB=0) {
-    const valid = Validator.isRhombus(side, dA, dB, angleA, angleB);
+    const valid = Validator.isRhombus(side, angleA, angleB, dA, dB);
     if (valid) {
-      this.side = side;
-      this.angleA = angleA;
-      this.angleB = angleB;
-      this.diagonalA = dA;
-      this.diagonalB = dB;
+      console.log(valid);
+      this.#side = side;
+      this.#angleA = angleA;
+      this.#angleB = angleB;
+      this.#dA = dA;
+      this.#dB = dB;
       this.compute(valid);
     }
   }
@@ -59,52 +60,54 @@ class Rhombus {
   }
 
   compute(type) {
+    console.log(type);
     if (type == 'DD') {
-      this.side = this.getSideFromDiagonal(this.diagonalA, this.diagonalB);
-      this.height = this.getHeightFromDiagonal(this.diagonalA, this.diagonalB);
+      this.#side = this.getSideFromDiagonal(this.diagonalA, this.diagonalB);
+      this.#h = this.getHeightFromDiagonal(this.diagonalA, this.diagonalB);
       // The smaller angle is opposite to smaller diagonal - https://www.quora.com/How-do-you-find-the-unknown-angle-of-a-rhombus
       if (this.diagonalA<this.diagonalB) {
-        this.angleA = 2*Math.atan((this.diagonalA/2)/(this.diagonalB/2));
-        this.angleB = Constants.PI - this.angleA;
+        this.#angleA = 2*Math.atan((this.diagonalA/2)/(this.diagonalB/2));
+        this.#angleB = Constants.PI - this.angleA;
       } else {
-        this.angleB = 2*Math.atan((this.diagonalB/2)/(this.diagonalA/2));
-        this.angleA = Constants.PI - this.angleB;
+        this.#angleB = 2*Math.atan((this.diagonalB/2)/(this.diagonalA/2));
+        this.#angleA = Constants.PI - this.angleB;
       }
     } else if (type == 'DS') {
       if (!this.diagonalA) {
-        this.diagonalA = 2*Math.sqrt(this.side**2-(this.diagonalB/2)**2);
+        this.#dA = 2*Math.sqrt(this.side**2-(this.diagonalB/2)**2);
       } else {
-        this.diagonalB = 2*Math.sqrt(this.side**2 - (this.diagonalA/2)**2);
+        this.#dB = 2*Math.sqrt(this.side**2 - (this.diagonalA/2)**2);
       }
       // Now we have both diagonals lets call this function again with type = 'DD'
       this.compute('DD');
     } else if (type == 'SA') {
-      if (!this.angleA) {
-        this.angleB = Constants.PI - this.angleA;
+      if (!!this.angleA) {
+        this.#angleB = Constants.PI - this.angleA;
       } else {
-        this.angleA = Constants.PI - this.angleB;
+        this.#angleA = Constants.PI - this.angleB;
       }
       // https://math.stackexchange.com/questions/1355449/length-of-any-of-the-diagonals-of-a-rhombus-of-given-side-and-a-given-angle
       const d1 = 2*this.side*Math.sin(this.angleA/2);
       const d2 = 2*this.side*Math.cos(this.angleA/2);
+      console.log(d1+' '+d2);
       if (d1>d2) {
         if (this.angleA > this.angleB) {
-          this.diagonalA = d1;
-          this.diagonalB = d2;
+          this.#dA = d1;
+          this.#dB = d2;
         } else {
-          this.diagonalB = d1;
-          this.diagonalA = d2;
+          this.#dB = d1;
+          this.#dA = d2;
         }
       } else {
         if (this.angleA > this.angleB) {
-          this.diagonalA = d2;
-          this.diagonalB = d1;
+          this.#dA = d2;
+          this.#dB = d1;
         } else {
-          this.diagonalB = d2;
-          this.diagonalA = d1;
+          this.#dA = d2;
+          this.#dB = d1;
         }
       }
-      this.height = this.getHeightFromDiagonal(this.diagonalA, this.diagonalB);
+      this.#h = this.getHeightFromDiagonal(this.diagonalA, this.diagonalB);
     }
   }
 
