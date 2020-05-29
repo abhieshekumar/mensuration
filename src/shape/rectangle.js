@@ -6,31 +6,11 @@ class Rectangle {
   #breadth = 0;
 
   /**
-   * Sets the length of the rectangle after validating using Validator class.
-   * @param {number} value
-   */
-  set length(value) {
-    if (Validator.isLength(value)) {
-      this.#length = value;
-    }
-  }
-
-  /**
    * Return the length property
    * @return {number} the length of rectangle
    */
   get length() {
     return this.#length;
-  }
-
-  /**
-   * Sets the breadth of the rectangle after validating using Validator class.
-   * @param {number} value
-   */
-  set breadth(value) {
-    if (Validator.isLength(value)) {
-      this.#breadth = value;
-    }
   }
 
   /**
@@ -47,8 +27,10 @@ class Rectangle {
    * @param {number} breadth
    */
   define(length, breadth) {
-    this.length = length;
-    this.breadth = breadth;
+    if (Validator.isLength(length) && Validator.isLength(breadth)) {
+      this.#length = length;
+      this.#breadth = breadth;
+    }
   }
 
   /**
