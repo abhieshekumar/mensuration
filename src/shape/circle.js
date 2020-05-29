@@ -6,16 +6,6 @@ class Circle {
   #radius = 0;
 
   /**
-   * Sets the radius of the circle after validating using the Validator class.
-   * @param {number} value
-   */
-  set radius(value) {
-    if (Validator.isLength(value)) {
-      this.#radius = value;
-    }
-  }
-
-  /**
    * Return the radius property
    * @return {number} the circle of radius
    */
@@ -28,7 +18,9 @@ class Circle {
    * @param {number} radius
    */
   define(radius) {
-    this.radius = radius;
+    if (Validator.isLength(radius)) {
+      this.#radius = value;
+    }
   }
 
   /**
