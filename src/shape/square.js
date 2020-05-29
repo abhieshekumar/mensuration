@@ -17,7 +17,7 @@ class Square {
    * @param {number} side
    */
   define(side) {
-    if (Validator.isLength(value)) {
+    if (Validator.isLength(side)) {
       this.#side = side;
     }
   }

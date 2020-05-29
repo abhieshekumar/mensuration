@@ -29,7 +29,7 @@ class Validator {
       return 'SSS';
     } else if (angles == 2) {
       return 'AAS|ASA';
-    } else if (Validator.isAngle(A) && Validator.isLength(a) || Validator.isAngle(B) && Validator.isLength(b) || Validator.isAngle(C) && Validator.isLength(c)) {
+    } else if (Validator.isAngle(A) && Validator.isLength(b) && Validator.isLength(c) || Validator.isAngle(B) && Validator.isLength(a) && Validator.isLength(c) || Validator.isAngle(C) && Validator.isLength(a) && Validator.isLength(b)) {
       return 'SAS';
     } else {
       return 'SSA';
@@ -38,16 +38,16 @@ class Validator {
 
   /**
    * @param {number} s The length of the side of rhombus
-   * @param {number} p Diagonal one of rhombus
-   * @param {number} q Second diagonal of rhombus
    * @param {number} A First angle of rhombus
    * @param {number} B Second angle of rhombus
+   * @param {number} p Diagonal one of rhombus
+   * @param {number} q Second diagonal of rhombus
    * @return {boolean}
    */
-  static isRhombus(s, p, q, A, B) {
+  static isRhombus(s, A, B, p, q) {
     const sides = Validator.isLength(s) + Validator.isLength(p) + Validator.isLength(q);
     const angles = Validator.isAngle(A) + Validator.isAngle(B);
-    if ((sides + angles) <= 2) {
+    if ((sides + angles) < 2) {
       // At least two piece of information
       return false;
     } else if (angles == 2) {
