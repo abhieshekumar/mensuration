@@ -11,6 +11,7 @@ const diameter = 2 * validRadius;
 const sectorAngle = Constants.PI;
 const sectorArea = (1/2) * validRadius * validRadius * sectorAngle;
 const arcLength = validRadius * sectorAngle;
+const circleObject = {radius: validRadius};
 
 const testCircle = () => {
   describe('Circle', () => {
@@ -32,6 +33,9 @@ const testCircle = () => {
     describe('Methods', () => {
       const temp = new Circle();
       temp.define(validRadius);
+      it(`Should create a valid object representing circle`, () => {
+        assert.deepEqual(temp.get(), circleObject);
+      });
       it(`Should calculate diameter for radius = ${validRadius}.`, () => {
         assert.equal(temp.diameter(), diameter);
       });
