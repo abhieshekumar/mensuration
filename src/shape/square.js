@@ -18,7 +18,7 @@ class Square {
    */
   define(side) {
     if (Validator.isLength(value)) {
-      this.side = side;
+      this.#side = side;
     }
   }
 
