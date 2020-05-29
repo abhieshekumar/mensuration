@@ -19,8 +19,8 @@ class Validator {
   }
 
   static isTriangle(a, b, c, A, B, C) {
-    const sides = !!a + !!b + !!c;
-    const angles = !!A + !!B + !!C;
+    const sides = Validator.isLength(a) + Validator.isLength(b) + Validator.isLength(c);
+    const angles = Validator.isAngle(A) + Validator.isAngle(B) + Validator.isAngle(C);
     if ((sides + angles) != 3) {
       return false;
     } else if (sides == 0) {
@@ -29,7 +29,7 @@ class Validator {
       return 'SSS';
     } else if (angles == 2) {
       return 'AAS|ASA';
-    } else if (!!A && !!a || !!B && !!b || !!C && !!c) {
+    } else if (Validator.isAngle(A) && Validator.isLength(a) || Validator.isAngle(B) && Validator.isLength(b) || Validator.isAngle(C) && Validator.isLength(c)) {
       return 'SAS';
     } else {
       return 'SSA';
@@ -37,30 +37,29 @@ class Validator {
   }
 
   /**
-   * @param {number} a The length of the side of rhombus
+   * @param {number} s The length of the side of rhombus
    * @param {number} p Diagonal one of rhombus
    * @param {number} q Second diagonal of rhombus
-   * @param {number} h Height of rhombus
    * @param {number} A First angle of rhombus
    * @param {number} B Second angle of rhombus
    * @return {boolean}
    */
-  static isRhombus(s, p, q, h, A, B) {
-    const sides = !!s + !!p + !!q + !!h;
-    const angles = !!A + !!B;
+  static isRhombus(s, p, q, A, B) {
+    const sides = Validator.isLength(s) + Validator.isLength(p) + Validator.isLength(q);
+    const angles = Validator.isAngle(A) + Validator.isAngle(B);
     if ((sides + angles) <= 2) {
       // At least two piece of information
       return false;
     } else if (angles == 2) {
       // At least one side
       return false;
-    } else if (!!p && !!q) {
+    } else if (Validator.isLength(p) && Validator.isLength(q)) {
       // Length of both diagonals
       return 'DD';
-    } else if (!!s && (!!p || !!q)) {
+    } else if (Validator.isLength(s) && (Validator.isLength(p) || Validator.isLength(q))) {
       // Length of side and one diagonal. If you have both diagonals it will go up
       return 'DS';
-    } else if ((!!A || !!B) && !!s) {
+    } else if ((Validator.isAngle(A) || Validator.isAngle(B)) && Validator.isLength(s)) {
       // One angle and the side
       return 'SA';
     }
