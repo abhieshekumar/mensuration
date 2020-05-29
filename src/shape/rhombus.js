@@ -37,39 +37,14 @@ class Rhombus {
     return this.#h;
   }
 
-  set side(param) {
-    this.#side = param;
-  }
-
-  set angleA(param) {
-    this.#angleA = param;
-  }
-
-  set angleB(param) {
-    this.#angleB = param;
-  }
-
-  set diagonalA(param) {
-    this.#dA = param;
-  }
-
-  set diagonalB(param) {
-    this.#dB = param;
-  }
-
-  set height(param) {
-    this.#h = param;
-  }
-
-  define(side=0, angleA=0, angleB=0, dA=0, dB=0, h=0) {
-    const valid = Validator.isRhombus(side, dA, dB, h, angleA, angleB);
+  define(side=0, angleA=0, angleB=0, dA=0, dB=0) {
+    const valid = Validator.isRhombus(side, dA, dB, angleA, angleB);
     if (valid) {
       this.side = side;
       this.angleA = angleA;
       this.angleB = angleB;
       this.diagonalA = dA;
       this.diagonalB = dB;
-      this.height = h;
       this.compute(valid);
     }
   }
