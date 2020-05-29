@@ -5,16 +5,6 @@ class Square {
   #side = 0;
 
   /**
-   * Sets the side of the square after validating using the Validator class.
-   * @param {number} value
-   */
-  set side(value) {
-    if (Validator.isLength(value)) {
-      this.#side = value;
-    }
-  }
-
-  /**
    * Return the side property
    * @return {number} the side of square
    */
@@ -27,7 +17,9 @@ class Square {
    * @param {number} side
    */
   define(side) {
-    this.side = side;
+    if (Validator.isLength(value)) {
+      this.#side = side;
+    }
   }
 
   /**

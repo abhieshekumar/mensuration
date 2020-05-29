@@ -69,7 +69,7 @@ class Triangle {
       this.angleA = angleA;
       this.angleB = angleB;
       this.angleC = angleC;
-      this.sideCompute(valid);
+      this.compute(valid);
     }
   }
 
@@ -232,14 +232,7 @@ class Triangle {
   }
 
   area() {
-    return Math.sqrt(semiPerimeter*(semiPerimeter-this.sideA)*(semiPerimeter-this.sideB)*(semiPerimeter-this.sideC));
-  }
-
-  isRightAngled() {
-    let sides = [this.sideA, this.sideB, this.sideC];
-    sides.sort();
-    sides = sides.map((x) => x**2);
-    return sides[2]**2 == (sides[0]**2 + sides[1]**2);
+    return Math.sqrt(this.semiPerimeter*(this.semiPerimeter-this.sideA)*(this.semiPerimeter-this.sideB)*(this.semiPerimeter-this.sideC));
   }
 
   isEquilateral() {
@@ -252,6 +245,27 @@ class Triangle {
 
   isScalene() {
     return this.isEquilateral() && this.isScalene();
+  }
+
+  isAcute() {
+    let sides = [this.sideA, this.sideB, this.sideC];
+    sides.sort();
+    sides = sides.map((x) => x**2);
+    return sides[2]**2 < (sides[0]**2 + sides[1]**2);
+  }
+
+  isObtuse() {
+    let sides = [this.sideA, this.sideB, this.sideC];
+    sides.sort();
+    sides = sides.map((x) => x**2);
+    return sides[2]**2 > (sides[0]**2 + sides[1]**2);
+  }
+
+  isRightAngled() {
+    let sides = [this.sideA, this.sideB, this.sideC];
+    sides.sort();
+    sides = sides.map((x) => x**2);
+    return sides[2]**2 == (sides[0]**2 + sides[1]**2);
   }
 }
 
