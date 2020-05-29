@@ -36,30 +36,6 @@ class Triangle {
     return this.#C;
   }
 
-  set sideA(param) {
-    this.#a = param;
-  }
-
-  set sideB(param) {
-    this.#b = param;
-  }
-
-  set sideC(param) {
-    this.#c = param;
-  }
-
-  set angleA(param) {
-    this.#A = param;
-  }
-
-  set angleB(param) {
-    this.#B = param;
-  }
-
-  set angleC(param) {
-    this.#C = param;
-  }
-
   define(sideA=0, sideB=0, sideC=0, angleA=0, angleB=0, angleC=0) {
     const valid = Validator.isTriangle(sideA, sideB, sideC, angleA, angleB, angleC);
     if (valid) {
