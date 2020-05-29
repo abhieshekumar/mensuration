@@ -232,7 +232,7 @@ class Triangle {
   }
 
   area() {
-    return Math.sqrt(this.semiPerimeter()*(this.semiPerimeter()-this.sideA)*(this.semiPerimeter()-this.sideB)*(this.semiPerimeter()-this.sideC));
+    return Math.sqrt(this.semiPerimeter*(this.semiPerimeter-this.sideA)*(this.semiPerimeter-this.sideB)*(this.semiPerimeter-this.sideC));
   }
 
   isEquilateral() {
