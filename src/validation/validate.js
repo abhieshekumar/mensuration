@@ -1,3 +1,5 @@
+import * as Constants from '../constants';
+
 /** Defines the unit functions for validating parameters.
  * It is used by validator class*/
 class Validate {
@@ -20,6 +22,13 @@ class Validate {
    */
   static isGreaterThanZero(param) {
     if (param > 0) {
+      return true;
+    }
+    return false;
+  }
+
+  static isAngle(param) {
+    if (param <= 2 * Constants.PI) {
       return true;
     }
     return false;
