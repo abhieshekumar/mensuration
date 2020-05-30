@@ -1,6 +1,6 @@
 {
-  "name": "mensurationjs",
-  "version": "1.0.0",
+  "name": "mensuration-js",
+  "version": "1.0.3",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
@@ -17,7 +17,9 @@
     "npm",
     "node",
     "mensuration",
-    "javascript"
+    "javascript",
+    "geometry",
+    "shapes"
   ],
   "author": "Abhishek Kumar",
   "license": "MIT",

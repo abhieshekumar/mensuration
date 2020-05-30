@@ -13,4 +13,4 @@ const Shape = {
   Triangle,
 };
 
-export default Shape;
+module.exports = Shape;
