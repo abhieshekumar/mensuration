@@ -14,6 +14,26 @@ const perimeter = 12.81;
 const testRhombus = () => {
   describe('Rhombus', () => {
     describe('Constructor', () => {
+      it(`Parameters remained unchanged if insuffecient parameters are provided.`, () => {
+        const temp = new Rhombus();
+        temp.define(0, 0, 0, d1, 0);
+        assert.equal(Math.round(temp.side), 0);
+        assert.equal(Math.round(temp.angleA), 0);
+        assert.equal(Math.round(temp.angleB), 0);
+        assert.equal(Math.round(temp.diagonalA), 0);
+        assert.equal(Math.round(temp.diagonalB), 0);
+        assert.equal(Math.round(temp.height), 0);
+      });
+      it(`Parameters remained unchanged if no side/diagonal is provided.`, () => {
+        const temp = new Rhombus();
+        temp.define(0, a1, a2, 0, 0);
+        assert.equal(Math.round(temp.side), 0);
+        assert.equal(Math.round(temp.angleA), 0);
+        assert.equal(Math.round(temp.angleB), 0);
+        assert.equal(Math.round(temp.diagonalA), 0);
+        assert.equal(Math.round(temp.diagonalB), 0);
+        assert.equal(Math.round(temp.height), 0);
+      });
       it(`Define rhombus based on the two diagonals - DD.`, () => {
         const temp = new Rhombus();
         temp.define(0, 0, 0, d1, d2);
