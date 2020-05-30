@@ -10,8 +10,6 @@ class Rhombus {
   // Both diagonals
   #dA = 0;
   #dB = 0;
-  // Height
-  #h = 0
 
   get side() {
     return this.#side;
@@ -33,10 +31,6 @@ class Rhombus {
     return this.#dB;
   }
 
-  get height() {
-    return this.#h;
-  }
-
   define(side=0, angleA=0, angleB=0, dA=0, dB=0) {
     const valid = Validator.isRhombus(side, angleA, angleB, dA, dB);
     if (valid) {
@@ -49,19 +43,18 @@ class Rhombus {
     }
   }
 
-  getSideFromDiagonal(d1, d2) {
-    return Math.sqrt((d1/2)**2 + (d2/2)**2);
+  getSideFromDiagonal() {
+    return Math.sqrt((this.diagonalA/2)**2 + (this.diagonalB/2)**2);
   }
 
-  getHeightFromDiagonal(d1, d2) {
+  height() {
     // Height = Area/side
-    return ((d1*d2)/2)/(this.getSideFromDiagonal(d1, d2));
+    return ((this.diagonalA*this.diagonalB)/2)/(this.getSideFromDiagonal());
   }
 
   compute(type) {
     if (type == 'DD') {
-      this.#side = this.getSideFromDiagonal(this.diagonalA, this.diagonalB);
-      this.#h = this.getHeightFromDiagonal(this.diagonalA, this.diagonalB);
+      this.#side = this.getSideFromDiagonal();
       // The smaller angle is opposite to smaller diagonal - https://www.quora.com/How-do-you-find-the-unknown-angle-of-a-rhombus
       if (this.diagonalA<this.diagonalB) {
         this.#angleA = 2*Math.atan((this.diagonalA/2)/(this.diagonalB/2));
@@ -104,7 +97,6 @@ class Rhombus {
           this.#dB = d2;
         }
       }
-      this.#h = this.getHeightFromDiagonal(this.diagonalA, this.diagonalB);
     }
   }
 
@@ -113,8 +105,7 @@ class Rhombus {
       angleA: this.angleA,
       angleB: this.angleB,
       diagonalA: this.diagonalA,
-      diagonalB: this.diagonalB,
-      height: this.height};
+      diagonalB: this.diagonalB};
   }
 
   perimeter() {
