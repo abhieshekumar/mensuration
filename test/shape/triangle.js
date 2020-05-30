@@ -17,6 +17,26 @@ const area = Math.sqrt(semiPerimeter*(semiPerimeter-a)*(semiPerimeter-b)*(semiPe
 const testTriangle = () => {
   describe('Triangle', () => {
     describe('Constructor', () => {
+      it(`Parameters remained unchanged if insuffecient parameters are provided`, () => {
+        const temp = new Triangle();
+        temp.define(0, 0, 0, A, B, 0);
+        assert.equal(Math.round(temp.sideA), 0);
+        assert.equal(Math.round(temp.sideB), 0);
+        assert.equal(Math.round(temp.sideC), 0);
+        assert.equal(Math.round(temp.angleA), 0);
+        assert.equal(Math.round(temp.angleB), 0);
+        assert.equal(Math.round(temp.angleC), 0);
+      });
+      it(`Parameters remained unchanged if no sides are provided`, () => {
+        const temp = new Triangle();
+        temp.define(0, 0, 0, A, B, C);
+        assert.equal(Math.round(temp.sideA), 0);
+        assert.equal(Math.round(temp.sideB), 0);
+        assert.equal(Math.round(temp.sideC), 0);
+        assert.equal(Math.round(temp.angleA), 0);
+        assert.equal(Math.round(temp.angleB), 0);
+        assert.equal(Math.round(temp.angleC), 0);
+      });
       it(`Define triangle based only all the of sides - SSS`, () => {
         const temp = new Triangle();
         temp.define(a, b, c);
