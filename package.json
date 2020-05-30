@@ -1,8 +1,8 @@
 {
-  "name": "mensuration",
-  "version": "0.0.1",
+  "name": "mensurationjs",
+  "version": "1.0.0",
   "description": "",
-  "main": "build/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "nyc mocha --require @babel/register",
     "build": "npm run lint && babel ./src -d ./lib",
