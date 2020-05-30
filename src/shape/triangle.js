@@ -114,7 +114,7 @@ class Triangle {
       } if (!this.sideB) {
         this.#b = this.getSide(this.sideC, this.sideA, this.angleB);
       } if (!this.sideC) {
-        this.#c = this.getSide(this.sideA, this.sideB, this.sideC);
+        this.#c = this.getSide(this.sideA, this.sideB, this.angleC);
       } if (!this.angleA) {
         this.#A = this.getAngle(this.sideB, this.sideC, this.sideA);
       } if (!this.angleB) {
@@ -142,9 +142,6 @@ class Triangle {
       } if (!!this.sideC && !this.angleC) {
         partialSide = this.sideC;
       }
-      console.log(knownAngle);
-      console.log(knownSide);
-      console.log(partialSide);
 
       if (knownAngle >= Constants.PI) {
         // Invalid. Do not proceed.
@@ -155,9 +152,9 @@ class Triangle {
       let unknownAngle;
       const ratio = knownSide/Math.sin(knownAngle);
       const temp = partialSide / ratio;
-      if (temp>1 || knownAngle >= Constants.HALF_PI && knownSide <= partialSide) {
+      if (temp > 1 || knownAngle >= Constants.HALF_PI && knownSide <= partialSide) {
         // Invalid. no Solution
-      } else if (temp==1 && knownSide >= partialSide) {
+      } else if (temp == 1 && knownSide >= partialSide) {
         // Unique solution
         partialAngle = Math.asin(temp);
         unknownAngle = Constants.PI - knownAngle - partialAngle;
