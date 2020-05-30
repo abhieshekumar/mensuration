@@ -40,7 +40,6 @@ class Rhombus {
   define(side=0, angleA=0, angleB=0, dA=0, dB=0) {
     const valid = Validator.isRhombus(side, angleA, angleB, dA, dB);
     if (valid) {
-      console.log(valid);
       this.#side = side;
       this.#angleA = angleA;
       this.#angleB = angleB;
@@ -60,7 +59,6 @@ class Rhombus {
   }
 
   compute(type) {
-    console.log(type);
     if (type == 'DD') {
       this.#side = this.getSideFromDiagonal(this.diagonalA, this.diagonalB);
       this.#h = this.getHeightFromDiagonal(this.diagonalA, this.diagonalB);
@@ -89,22 +87,21 @@ class Rhombus {
       // https://math.stackexchange.com/questions/1355449/length-of-any-of-the-diagonals-of-a-rhombus-of-given-side-and-a-given-angle
       const d1 = 2*this.side*Math.sin(this.angleA/2);
       const d2 = 2*this.side*Math.cos(this.angleA/2);
-      console.log(d1+' '+d2);
-      if (d1>d2) {
-        if (this.angleA > this.angleB) {
+      if (this.angleA > this.angleB) {
+        if (d1 > d2) {
           this.#dA = d1;
           this.#dB = d2;
         } else {
-          this.#dB = d1;
           this.#dA = d2;
+          this.#dB = d1;
         }
       } else {
-        if (this.angleA > this.angleB) {
+        if (d1 > d2) {
           this.#dA = d2;
           this.#dB = d1;
         } else {
-          this.#dA = d2;
-          this.#dB = d1;
+          this.#dA = d1;
+          this.#dB = d2;
         }
       }
       this.#h = this.getHeightFromDiagonal(this.diagonalA, this.diagonalB);
