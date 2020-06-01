@@ -151,7 +151,7 @@ class Rhombus {
   }
 
   /**
-   * Computes the parameter of rhombus
+   * Computes the perimeter of rhombus
    * @return {number} the perimeter
    */
   perimeter() {

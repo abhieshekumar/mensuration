@@ -1,7 +1,7 @@
 import Validator from '../validation/validator';
 import * as Constants from '../constants';
 
-/** Perfroms basic operations on triangle given the three parameters of the triangle with atleast one side. */
+/** This class realises the Triangle class */
 class Triangle {
   // Sides
   #a = 0;
@@ -12,31 +12,65 @@ class Triangle {
   #B = 0;
   #C = 0;
 
+  /**
+   * Returns the sideA property
+   * @return {number} the sideA of triangle
+   */
   get sideA() {
     return this.#a;
   }
 
+  /**
+   * Returns the sideB property
+   * @return {number} the sideB of triangle
+   */
   get sideB() {
     return this.#b;
   }
 
+  /**
+   * Returns the sideC property
+   * @return {number} the sideC of triangle
+   */
   get sideC() {
     return this.#c;
   }
 
+  /**
+   * Returns the angleA property
+   * @return {number} the angleA of triangle
+   */
   get angleA() {
     return this.#A;
   }
 
+  /**
+   * Returns the angleB property
+   * @return {number} the angleB of triangle
+   */
   get angleB() {
     return this.#B;
   }
 
+  /**
+   * Returns the angleC property
+   * @return {number} the angleC of triangle
+   */
   get angleC() {
     return this.#C;
   }
 
+  /**
+   * Defines the parameters of the triangle
+   * @param {number} sideA
+   * @param {number} sideB
+   * @param {number} sideC
+   * @param {number} angleA
+   * @param {number} angleB
+   * @param {number} angleC
+   */
   define(sideA=0, sideB=0, sideC=0, angleA=0, angleB=0, angleC=0) {
+    // eslint-disable-next-line max-len
     const valid = Validator.isTriangle(sideA, sideB, sideC, angleA, angleB, angleC);
     if (valid) {
       this.#a = sideA;
@@ -49,6 +83,15 @@ class Triangle {
     }
   }
 
+  /**
+   * Returns the unknown side of the triangle given the
+   * other two sides and the angle corresponding to
+   * the unknown side.
+   * @param {number} a
+   * @param {number} b
+   * @param {number} C
+   * @return {number} the unknown side
+   */
   getSide(a, b, C) {
     if (C > 0.001) {
       return Math.sqrt(a * a + b * b - 2 * a * b * Math.cos(C));
@@ -57,6 +100,13 @@ class Triangle {
     }
   }
 
+  /**
+   * Computes the angle opposite the the last parameter of the function
+   * @param {number} a side
+   * @param {number} b side
+   * @param {number} c side
+   * @return {number} angle corresponding to side c
+   */
   getAngle(a, b, c) {
     const temp = (a * a + b * b - c * c) / (2 * a * b);
     if (-1 <= temp && temp <= 0.9999999) {
@@ -68,8 +118,13 @@ class Triangle {
     }
   }
 
+  /**
+   * Defines the complete triangle onject
+   * @param {string} type indicates the type of parameter given by the user
+   */
   compute(type) {
     if (type == 'SSS') {
+      // eslint-disable-next-line max-len
       if (this.sideA + this.sideB <= this.sideC || this.sideB + this.sidec <= this.sideA || this.sideC + this.sideA <= this.sideB) {
         // Invalid
       } else {
@@ -106,6 +161,7 @@ class Triangle {
         this.#c = ratio * sinC;
       }
     } else if (type == 'SAS') {
+      // eslint-disable-next-line max-len
       if (!!this.angleA && this.angleA >= Constants.PI || !!this.angleB && this.angleB >= Constants.PI || !!this.angleC && this.angleC >= Constants.PI) {
         // Invalid. Do not proceed
       }
@@ -152,6 +208,7 @@ class Triangle {
       let unknownAngle;
       const ratio = knownSide/Math.sin(knownAngle);
       const temp = partialSide / ratio;
+      // eslint-disable-next-line max-len
       if (temp > 1 || knownAngle >= Constants.HALF_PI && knownSide <= partialSide) {
         // Invalid. no Solution
       } else if (temp == 1 && knownSide >= partialSide) {
@@ -191,6 +248,10 @@ class Triangle {
     }
   }
 
+  /**
+   * Used to get the complete triangle object
+   * @return {Object} the triangle object
+   */
   get() {
     return {sideA: this.sideA,
       sideB: this.sideB,
@@ -200,30 +261,60 @@ class Triangle {
       angleC: this.angleC};
   }
 
+  /**
+   * Computes the perimeter of triangle
+   * @return {number} the perimeter
+   */
   perimeter() {
     return this.sideA + this.sideB + this.sideC;
   }
 
+  /**
+   * Computes the semi perimeter of triangle
+   * @return {number} the semi perimeter
+   */
   semiPerimeter() {
     return this.perimeter()/2;
   }
 
+  /**
+   * Computes the area of triangle
+   * @return {number} the area
+   */
   area() {
+    // eslint-disable-next-line max-len
     return Math.sqrt(this.semiPerimeter()*(this.semiPerimeter()-this.sideA)*(this.semiPerimeter()-this.sideB)*(this.semiPerimeter()-this.sideC));
   }
 
+  /**
+   * Checks if triangle is equilateral
+   * @return {boolean}
+   */
   isEquilateral() {
     return this.sideA === this.sideB && this.sideB === this.sideC;
   }
 
+  /**
+   * Checks if triangle is isosceles
+   * @return {boolean}
+   */
   isIsosceles() {
+    // eslint-disable-next-line max-len
     return this.sideA === this.sideB || this.sideA === this.sideC || this.sideB === this.sideC;
   }
 
+  /**
+   * Checks if triangle is scalene
+   * @return {boolean}
+   */
   isScalene() {
     return !this.isEquilateral() && !this.isIsosceles();
   }
 
+  /**
+   * Checks if triangle is acute
+   * @return {boolean}
+   */
   isAcute() {
     let sides = [this.sideA, this.sideB, this.sideC];
     sides.sort();
@@ -231,6 +322,10 @@ class Triangle {
     return sides[2] < (sides[0] + sides[1]);
   }
 
+  /**
+   * Checks if triangle is obtuse
+   * @return {boolean}
+   */
   isObtuse() {
     let sides = [this.sideA, this.sideB, this.sideC];
     sides.sort();
@@ -238,6 +333,10 @@ class Triangle {
     return sides[2] > (sides[0] + sides[1]);
   }
 
+  /**
+   * Checks if triangle is right angled
+   * @return {boolean}
+   */
   isRightAngled() {
     let sides = [this.sideA, this.sideB, this.sideC];
     sides.sort();
