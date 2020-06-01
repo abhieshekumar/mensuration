@@ -27,6 +27,11 @@ class Validate {
     return false;
   }
 
+  /**
+   * Checks if param is a valid angle
+   * @param {number} param
+   * @return {boolean}
+   */
   static isAngle(param) {
     if (param <= 2 * Constants.PI) {
       return true;
