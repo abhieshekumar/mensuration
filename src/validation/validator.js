@@ -13,13 +13,30 @@ class Validator {
     return rules.every((rule) => Validate[rule](param));
   }
 
+  /**
+   * Checks if param qualifies to be angle
+   * @param {number} param
+   * @return {boolean} whether param is a valid angle
+   */
   static isAngle(param) {
     const rules = ['isNumber', 'isGreaterThanZero', 'isAngle'];
     return rules.every((rule) => Validate[rule](param));
   }
 
+  /**
+   * Checks for the type of triangle
+   * @param {number} a side
+   * @param {number} b side
+   * @param {number} c side
+   * @param {number} A angle
+   * @param {number} B angle
+   * @param {number} C angle
+   * @return {string} the type of triangle
+   */
   static isTriangle(a, b, c, A, B, C) {
+    // eslint-disable-next-line max-len
     const sides = Validator.isLength(a) + Validator.isLength(b) + Validator.isLength(c);
+    // eslint-disable-next-line max-len
     const angles = Validator.isAngle(A) + Validator.isAngle(B) + Validator.isAngle(C);
     if ((sides + angles) != 3) {
       return false;
@@ -29,6 +46,7 @@ class Validator {
       return 'SSS';
     } else if (angles == 2) {
       return 'AAS|ASA';
+    // eslint-disable-next-line max-len
     } else if (Validator.isAngle(A) && Validator.isLength(b) && Validator.isLength(c) || Validator.isAngle(B) && Validator.isLength(a) && Validator.isLength(c) || Validator.isAngle(C) && Validator.isLength(a) && Validator.isLength(b)) {
       return 'SAS';
     } else {
@@ -45,6 +63,7 @@ class Validator {
    * @return {boolean}
    */
   static isRhombus(s, A, B, p, q) {
+    // eslint-disable-next-line max-len
     const sides = Validator.isLength(s) + Validator.isLength(p) + Validator.isLength(q);
     const angles = Validator.isAngle(A) + Validator.isAngle(B);
     if ((sides + angles) < 2) {
@@ -56,9 +75,12 @@ class Validator {
     } else if (Validator.isLength(p) && Validator.isLength(q)) {
       // Length of both diagonals
       return 'DD';
+    // eslint-disable-next-line max-len
     } else if (Validator.isLength(s) && (Validator.isLength(p) || Validator.isLength(q))) {
+      // eslint-disable-next-line max-len
       // Length of side and one diagonal. If you have both diagonals it will go up
       return 'DS';
+    // eslint-disable-next-line max-len
     } else if ((Validator.isAngle(A) || Validator.isAngle(B)) && Validator.isLength(s)) {
       // One angle and the side
       return 'SA';
