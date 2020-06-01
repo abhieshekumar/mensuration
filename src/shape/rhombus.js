@@ -1,36 +1,62 @@
 import * as Constants from '../constants';
 import Validator from '../validation/validator';
 
+/** This class realises the Rhombus object */
 class Rhombus {
-  // Side
   #side = 0;
-  // Angles
   #angleA = 0;
   #angleB = 0;
-  // Both diagonals
   #dA = 0;
   #dB = 0;
 
+  /**
+   * Returns the side property
+   * @return {number} the side of rhombus
+   */
   get side() {
     return this.#side;
   }
 
+  /**
+   * Returns the angleA property
+   * @return {number} angleA of rhombus
+   */
   get angleA() {
     return this.#angleA;
   }
 
+  /**
+   * Returns the angleB property
+   * @return {number} angleB of rhombus
+   */
   get angleB() {
     return this.#angleB;
   }
 
+  /**
+   * Returns the diagonalA property
+   * @return {number} diagonalA of rhombus
+   */
   get diagonalA() {
     return this.#dA;
   }
 
+  /**
+   * Returns the diagonalB property
+   * @return {number} diagonalB of rhombus
+   */
   get diagonalB() {
     return this.#dB;
   }
 
+  /**
+   * Defines the parameters of the rhombus
+   * @param {number} side
+   * @param {number} angleA in radians
+   * @param {number} angleB in radians
+   * @param {number} dA diagonal
+   * @param {number} dB diagonal
+   */
   define(side=0, angleA=0, angleB=0, dA=0, dB=0) {
     const valid = Validator.isRhombus(side, angleA, angleB, dA, dB);
     if (valid) {
@@ -43,15 +69,27 @@ class Rhombus {
     }
   }
 
+  /**
+   * Returns the side length of rhombus given both diagonals
+   * @return {number} the side length
+   */
   getSideFromDiagonal() {
     return Math.sqrt((this.diagonalA/2)**2 + (this.diagonalB/2)**2);
   }
 
+  /**
+   * Computes height given the diagonal of radius
+   * @return {number} the height of rhombus
+   */
   height() {
     // Height = Area/side
     return ((this.diagonalA*this.diagonalB)/2)/(this.getSideFromDiagonal());
   }
 
+  /**
+   * Defines the complete rhombus object
+   * @param {string} type indicates the type of parameter given by user
+   */
   compute(type) {
     if (type == 'DD') {
       this.#side = this.getSideFromDiagonal();
@@ -69,7 +107,7 @@ class Rhombus {
       } else {
         this.#dB = 2*Math.sqrt(this.side**2 - (this.diagonalA/2)**2);
       }
-      // Now we have both diagonals lets call this function again with type = 'DD'
+      // We have both diagonals lets call function again with type = 'DD'
       this.compute('DD');
     } else if (type == 'SA') {
       if (!!this.angleA) {
@@ -100,6 +138,10 @@ class Rhombus {
     }
   }
 
+  /**
+   * Used to get the complete rhombus object
+   * @return {Object} the rhombus object
+   */
   get() {
     return {side: this.side,
       angleA: this.angleA,
@@ -108,10 +150,18 @@ class Rhombus {
       diagonalB: this.diagonalB};
   }
 
+  /**
+   * Computes the parameter of rhombus
+   * @return {number} the perimeter
+   */
   perimeter() {
     return this.side*4;
   }
 
+  /**
+   * Computes the area of rhombus
+   * @return {number} the area
+   */
   area() {
     return (this.diagonalA*this.diagonalB)/2;
   }
